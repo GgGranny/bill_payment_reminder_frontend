@@ -1,0 +1,76 @@
+@import "tailwindcss";
+
+@layer components {
+    .field-container {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .field-container label {
+        color: rgba(124, 131, 138, 100%);
+        letter-spacing: .2px;
+        font-family: "Poppins", sans-serif;
+        font-style: normal;
+        font-weight: 500;
+        font-size: 12px;
+        padding-left: 2px;
+
+    }
+
+    .field-container input {
+        width: 100%;
+        height: 50px;
+        border-radius: 20px;
+        padding: 0 14px;
+        border: none;
+        background-color: rgba(176, 186, 195, 40%);
+        width: 100%;
+
+        &:focus {
+            outline: 1px solid #454ADE;
+        }
+
+        &::placeholder {
+            font-family: "Poppins", sans-serif;
+            font-style: normal;
+            font-size: 12px;
+        }
+    }
+
+    .shape {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 90%;
+        height: 80%;
+        background: #7973f7;
+        border-radius: 40% 60% 55% 45% / 60% 40% 55% 45%;
+        /* blob effect */
+        z-index: -1;
+    }
+
+    .shape::before {
+        content: "";
+        position: absolute;
+        top: 20%;
+        left: 30%;
+        width: 90%;
+        height: 80%;
+        background: #6366f1;
+        border-radius: 83% 17% 70% 30% / 30% 30% 70% 70%;
+        z-index: -1;
+    }
+
+    .shape::after {
+        content: "";
+        position: absolute;
+        top: 20%;
+        left: 10%;
+        width: 100%;
+        height: 100%;
+        background: #4f46e5;
+        border-radius: 36% 64% 48% 52% / 15% 42% 58% 85%;
+        z-index: -1;
+    }
+
+}

@@ -1,0 +1,21 @@
+@import "tailwindcss";
+
+
+
+@layer base {
+    * {
+        font-family: "Poppins", sans-serif;
+    }
+}
+
+
+@theme {
+    /*iris */
+    --color-primary-color: #454ADE;
+    /*space cadet*/
+    --color-space-cadet: #1B1F3B;
+    /*plum (pink)*/
+    --color-plum: #D9A0E4;
+    /*snow*/
+    --color-snow: #F9F1F3;
+}

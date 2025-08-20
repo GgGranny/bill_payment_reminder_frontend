@@ -1,0 +1,16 @@
+@import "tailwindcss";
+
+@layer components {
+    .nav-links {
+        color: var(--color-space-cadet);
+
+        &:hover {
+            color: var(--color-primary-color);
+        }
+
+    }
+
+    .isActive {
+        color: var(--color-primary-color);
+    }
+}
