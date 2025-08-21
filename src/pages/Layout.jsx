@@ -12,7 +12,7 @@ const Layout = () => {
                 <div className="w-full">
                     <Navbar />
                 </div>
-                <div>
+                <div className="overflow-auto h-[90vh]">
                     <Outlet />
                 </div>
             </div>

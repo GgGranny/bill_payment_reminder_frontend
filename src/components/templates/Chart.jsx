@@ -1,17 +1,18 @@
 import ApexCharts from "apexcharts";
 import { useEffect } from "react";
+
 export const Chart = () => {
     const getChart = () => {
         var options = {
             series: [{
                 name: 'series1',
-                data: [31, 40, 28, 51, 42, 109, 100]
+                data: [31, 40, 28, 51, 42, 109, 100, 120]
             }, {
                 name: 'series2',
                 data: [11, 32, 45, 32, 34, 52, 41]
             }],
             chart: {
-                height: 350,
+                height: "100%",
                 type: 'area'
             },
             dataLabels: {
@@ -36,7 +37,7 @@ export const Chart = () => {
     }
     useEffect(getChart, []);
     return (
-        <div className="chart" id="chart">
+        <div className="chart h-full w-full" id="chart">
 
         </div>
     )
