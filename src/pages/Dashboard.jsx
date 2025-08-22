@@ -4,12 +4,20 @@ import { cardData } from "../service/dashboardService";
 import Chart from "../components/templates/Chart";
 import Calender from "../components/templates/Calender";
 import Button from "../components/auth-button/Button";
-
+import BillTable from "../components/templates/BillTable";
+import { getAllBills } from "../service/Bills";
+import { useEffect, useState } from "react";
 
 const Dashboard = () => {
+    const [allBills, setAllBills] = useState([]);
+
+    useEffect(() => {
+        const bills = getAllBills();
+        setAllBills(bills);
+    }, [])
     return (
-        <div className="w-[97%] h-screen mx-auto mt-3 border">
-            <h1 className="text-2xl font-semibold text-space-cadet">Dashboard</h1>
+        <div className="w-[97%] h-screen mx-auto mt-3 ">
+            <h1 className="text-2xl font-semibold text-space-cadet mb-6">Dashboard</h1>
             <div className="flex justify-around">
                 {cardData.map((data, index) => {
                     return (
@@ -28,7 +36,8 @@ const Dashboard = () => {
                 </div>
             </div>
 
-            <div className="flex justify-between items-center mt-6 w-[97%] ">
+            {/*Add bill bustton*/}
+            <div className="flex justify-between items-center mt-7 w-[97%]">
                 <div className="text-sm">
                     <h1 className="text-primary-color font-normal">Your Bills</h1>
                     <p className="text-xs leading-8 text-gray-500">Manage and track all your upcoming payments</p>
@@ -39,6 +48,12 @@ const Dashboard = () => {
                     </Button>
                 </div>
             </div>
+
+            {/*Table*/}
+            <div className="w-[97%] h-fit">
+                <BillTable allBills={allBills} />
+            </div>
+
         </div >
     )
 }

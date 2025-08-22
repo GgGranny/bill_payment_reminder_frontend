@@ -1,4 +1,5 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+import { billData } from '../../utils/calender';
 
 const Calendar = () => {
     const [currentDate, setCurrentDate] = useState(new Date());
@@ -13,6 +14,9 @@ const Calendar = () => {
 
     // Generate days array for the month
     const days = [];
+
+
+
 
     // Add empty cells for days before the first day of the month
     for (let i = 0; i < firstDayOfMonth; i++) {
@@ -51,6 +55,7 @@ const Calendar = () => {
         'January', 'February', 'March', 'April', 'May', 'June',
         'July', 'August', 'September', 'October', 'November', 'December'
     ];
+
 
     return (
         <div className=" max-w-md mx-auto h-full bg-white rounded-lg shadow-md p-6">
@@ -100,18 +105,25 @@ const Calendar = () => {
             </div>
 
             {/* Calendar grid */}
-            <div className="grid grid-cols-7 gap-2 ">
-                {days.map((day, index) => (
-                    <div
-                        key={index}
-                        className={`h-6 flex items-center justify-center rounded-lg text-sm font-medium transition-colors
+            <div className="grid grid-cols-7 gap-2">
+                {days.map((day, index) => {
+                    let formattedDate = `${currentYear}-${String(currentMonth).padStart(2, "0")}-${String(day).padStart(2, "0")}`;
+                    return (
+                        <div
+                            key={index}
+                            className={`relative h-6 flex items-center justify-center rounded-lg text-sm font-medium transition-colors
                             ${day ? 'cursor-pointer hover:bg-gray-100' : ''}
                             ${isToday(day) ? 'bg-blue-100 text-blue-700 border-2 border-blue-300' : 'text-gray-700'}
                             ${day && !isToday(day) ? 'hover:bg-gray-100' : ''}
-            `               }>
-                        {day}
-                    </div>
-                ))}
+                            ${billData.includes(formattedDate) ? "bg-blue-100 text-blue-700 border-2 border-blue-300" : ""}
+                            `}>
+                            {billData.includes(formattedDate) && (
+                                <div className="absolute top-[-4px] right-0 h-[6px] w-[6px] outline-2 outline-white rounded bg-blue-400"></div>
+                            )}
+                            {day}
+                        </div>
+                    )
+                })}
             </div>
         </div>
     );

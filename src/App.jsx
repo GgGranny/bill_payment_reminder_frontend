@@ -5,7 +5,7 @@ import LandingPage from './pages/LandingPage';
 import Login from './pages/Login';
 import Dashboard from './pages/Dashboard';
 import Layout from './pages/Layout';
-import AddBills from './pages/AddBills';
+import AddBills from './pages/Form';
 
 function App() {
   return (
