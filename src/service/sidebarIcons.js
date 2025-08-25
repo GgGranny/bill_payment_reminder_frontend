@@ -23,7 +23,8 @@ export const sidebarIcons = [
         links: [
             {
                 name: "Dashboard",
-                icon: "MdSpaceDashboard"
+                icon: "MdSpaceDashboard",
+                path: "/layout/dashboard"
             }
         ]
     },
@@ -32,11 +33,13 @@ export const sidebarIcons = [
         links: [
             {
                 name: "Pending",
-                icon: "MdPendingActions"
+                icon: "MdPendingActions",
+                path: "/layout/payment"
             },
             {
                 name: "Paid",
-                icon: "MdOutlineDownloadDone"
+                icon: "MdOutlineDownloadDone",
+                path: "/layout/paid"
             }
         ]
     },
@@ -45,15 +48,17 @@ export const sidebarIcons = [
         links: [
             {
                 name: "Notification",
-                icon: "MdNotifications"
+                icon: "MdNotifications",
+                path: "/layout/notification"
             },
             {
                 name: "Settings",
-                icon: "MdSettings"
+                icon: "MdSettings",
+                path: "/layout/setting"
             },
             {
                 name: "Dark mode",
-                icon: "MdDarkMode"
+                icon: "MdDarkMode",
             }
         ]
     }

@@ -5,16 +5,26 @@ import Chart from "../components/templates/Chart";
 import Calender from "../components/templates/Calender";
 import Button from "../components/auth-button/Button";
 import BillTable from "../components/templates/BillTable";
-import { getAllBills } from "../service/Bills";
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router";
+import { getAllBills } from "../api/Bill";
 
 const Dashboard = () => {
+    const navigate = useNavigate();
     const [allBills, setAllBills] = useState([]);
 
     useEffect(() => {
-        const bills = getAllBills();
-        setAllBills(bills);
+        getAllBills()
+            .then((data) => {
+                setAllBills(data.data);
+            })
+            .catch(error => console.error(error));
     }, [])
+
+    const handleAddBill = () => {
+        navigate("/layout/add");
+        console.log("clicked ");
+    }
     return (
         <div className="w-[97%] h-screen mx-auto mt-3 ">
             <h1 className="text-2xl font-semibold text-space-cadet mb-6">Dashboard</h1>
@@ -43,7 +53,7 @@ const Dashboard = () => {
                     <p className="text-xs leading-8 text-gray-500">Manage and track all your upcoming payments</p>
                 </div>
                 <div>
-                    <Button className="bg-primary-color font-semibold px-4 py-2 text-white rounded hover:bg-blue-700 hover:cursor-pointer" >
+                    <Button className="bg-primary-color font-semibold px-4 py-2 text-white rounded hover:bg-blue-700 hover:cursor-pointer" onClick={handleAddBill} >
                         + Add New Bill
                     </Button>
                 </div>

@@ -26,7 +26,7 @@ const Sidebar = () => {
                             }
                             return (
                                 <div key={i}>
-                                    <NavLink to="/layout/add" className="flex justify-start items-center gap-2 text-gray-700 text-sm hover:bg-[#A1A4FF] rounded px-4 py-2">
+                                    <NavLink to={link.path} className="flex justify-start items-center gap-2 text-gray-700 text-sm hover:bg-[#A1A4FF] rounded px-4 py-2">
                                         <Icon className="w-[1.2em] h-auto" /><span>{link.name}</span>
                                     </NavLink>
                                 </div>

@@ -1,4 +1,4 @@
-import { NavLink } from "react-router";
+import { NavLink, useNavigate } from "react-router";
 import Button from "./auth-button/Button";
 import "../styles/navbarStyles.css"
 import { useState } from "react";
@@ -6,8 +6,10 @@ import { BsBorderWidth } from "react-icons/bs";
 import { IoClose } from "react-icons/io5";
 
 const Navbar = () => {
+    const navigate = useNavigate();
     const [isOpen, setIsOpen] = useState(false);
     const handleClick = () => {
+        navigate("/login")
     }
 
     const handleToggleBtn = () => {
