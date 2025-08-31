@@ -11,6 +11,7 @@ import ProfileUpload from './pages/ProfileUpload';
 import Settings from './pages/Settings';
 import Tables from './pages/Tables';
 import UserProfile from './pages/UserProfile';
+import MyFullCalender from './pages/MyFullCalender';
 
 function App() {
   return (
@@ -27,6 +28,7 @@ function App() {
           <Route path="/layout/table" element={<Tables />} />
           <Route path="/layout/user" element={<UserProfile />} />
           <Route path="/layout/edit/:id" element={<Form />} />
+          <Route path="/layout/calender" element={<MyFullCalender />} />
         </Route>
       </Routes>
     </BrowserRouter>

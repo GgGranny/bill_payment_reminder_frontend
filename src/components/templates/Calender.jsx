@@ -1,10 +1,11 @@
 import { useState, useEffect } from 'react';
 import { getAllBills } from '../../api/Bill';
+import { useNavigate } from 'react-router';
 
 const Calendar = () => {
     const [currentDate, setCurrentDate] = useState(new Date());
     const [billData, setBillData] = useState([]);
-
+    const navigate = useNavigate();
     const today = new Date();
     const currentMonth = currentDate.getMonth();
     const currentYear = currentDate.getFullYear();
@@ -111,6 +112,7 @@ const Calendar = () => {
                             ${day ? 'cursor-pointer hover:bg-gray-100' : ''}
                             ${isToday(day) ? 'bg-blue-100 text-blue-700 border-2 border-blue-300' : 'text-gray-700'}
                             ${bgColor} ${borderColor}`}
+                            onClick={() => navigate("/layout/calender")}
                         >
                             {billForDay && (
                                 <div className={`absolute top-[-4px] right-0 h-[6px] w-[6px] outline-2 outline-white rounded ${dotColor}`}></div>
