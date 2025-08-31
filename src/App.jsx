@@ -7,6 +7,8 @@ import Dashboard from './pages/Dashboard';
 import Layout from './pages/Layout';
 import Form from './pages/Form';
 import Login from './pages/Login';
+import ProfileUpload from './pages/ProfileUpload';
+import Settings from './pages/Settings';
 
 function App() {
   return (
@@ -18,6 +20,8 @@ function App() {
         <Route path="/layout" element={<Layout />} >
           <Route path="/layout/dashboard" element={<Dashboard />} />
           <Route path="/layout/add" element={<Form />} />
+          <Route path="/layout/profileUpload" element={<ProfileUpload />} />
+          <Route path="/layout/setting" element={<Settings />} />
         </Route>
       </Routes>
     </BrowserRouter>

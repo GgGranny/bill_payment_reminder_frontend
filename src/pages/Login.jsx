@@ -1,6 +1,7 @@
 import heroImage from "../assets/heroImages/hero-image.png";
 import Form from "../components/Form";
 
+
 const Login = () => {
     return (
         <div className="login-form-container h-screen max-w-[1500px]">

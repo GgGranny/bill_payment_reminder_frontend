@@ -1,43 +1,31 @@
-import ApexCharts from "apexcharts";
-import { useEffect } from "react";
+import { VictoryBar, VictoryChart, VictoryTheme } from "victory";
+
 
 export const Chart = () => {
-    const getChart = () => {
-        var options = {
-            series: [{
-                name: 'series2',
-                data: [11, 32, 45, 32, 34, 52, 41],
-                color: "#454ADE"
-            }],
-            chart: {
-                height: "100%",
-                type: 'area'
-            },
-            dataLabels: {
-                enabled: false
-            },
-            stroke: {
-                curve: 'smooth'
-            },
-            xaxis: {
-                type: 'datetime',
-                categories: ["2018-09-19T00:00:00.000Z", "2018-09-19T01:30:00.000Z", "2018-09-19T02:30:00.000Z", "2018-09-19T03:30:00.000Z", "2018-09-19T04:30:00.000Z", "2018-09-19T05:30:00.000Z", "2018-09-19T06:30:00.000Z"]
-            },
-            tooltip: {
-                x: {
-                    format: 'dd/MM/yy HH:mm'
-                },
-            },
-        };
-
-        var chart = new ApexCharts(document.querySelector("#chart"), options);
-        chart.render();
-    }
-    useEffect(getChart, []);
     return (
-        <div className="chart h-full w-full" id="chart">
-
-        </div>
+        <VictoryChart
+            domainPadding={25}
+            theme={VictoryTheme.clean}
+        >
+            <VictoryBar
+                categories={{
+                    x: [
+                        "birds",
+                        "cats",
+                        "dogs",
+                        "fish",
+                        "frogs",
+                    ],
+                }}
+                data={[
+                    { x: "cats", y: 1 },
+                    { x: "dogs", y: 2 },
+                    { x: "birds", y: 3 },
+                    { x: "fish", y: 2 },
+                    { x: "frogs", y: 1 },
+                ]}
+            />
+        </VictoryChart>
     )
 }
 

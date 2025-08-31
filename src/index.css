@@ -19,3 +19,27 @@
     /*snow*/
     --color-snow: #F9F1F3;
 }
+
+/* Default (light) */
+body {
+    background-color: white;
+    color: black;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+/* Dark mode */
+body.dark {
+    background-color: #111827;
+    /* gray-900 */
+    color: white !important;
+    /* force all text white */
+}
+
+/* Force all text and backgrounds inside body.dark */
+body.dark * {
+    color: white !important;
+    background-color: #1f2937 !important;
+    /* gray-800 */
+    border-color: #374151 !important;
+    /* optional: make borders visible in dark mode */
+}

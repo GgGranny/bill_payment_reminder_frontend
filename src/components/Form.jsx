@@ -2,18 +2,23 @@ import "../styles/loginForm.css";
 import Button from "./auth-button/Button";
 import { NavLink, useLocation, useNavigate } from "react-router";
 import { FcGoogle } from "react-icons/fc";
-import { loginRequest } from "../auth/User";
+import { loginRequest, signupRequest } from "../auth/User";
 import { useState } from "react";
+import { Alert } from "antd";
+
 
 const Form = ({ page }) => {
     const location = useLocation();
     const isSignup = location.pathname === "/signup";
     const navigate = useNavigate();
+    const [alertMessage, setAlertMessage] = useState("");
+    const [alertMessageType, setAlertMessageType] = useState("");
     const [data, setData] = useState({
         fullName: '',
         email: '',
         password: '',
     });
+
 
     const handelChange = (e) => {
         const { name, value } = e.target;
@@ -25,28 +30,61 @@ const Form = ({ page }) => {
 
     const handleSubmitForm = (event) => {
         event.preventDefault();
+
         if (!isSignup) {
-            loginRequest(data).then((response) => {
-                if (response.status === 200) {
-                    localStorage.setItem("FULL_NAME", response.data.fullName);
-                    localStorage.setItem("EMAIL", response.data.email);
-                    localStorage.setItem("USER_ID", response.data.id);
-                    localStorage.setItem("PROFILE", response.data.profile | null)
-                    console.log(response);
-                    navigate("/layout/dashboard");
-                }
-            })
+            // LOGIN
+            loginRequest(data)
+                .then((response) => {
+                    if (response.status === 200) {
+                        localStorage.setItem("FULL_NAME", response.data.fullName);
+                        localStorage.setItem("EMAIL", response.data.email);
+                        localStorage.setItem("USER_ID", response.data.id);
+                        localStorage.setItem("PROFILE", response.data.profile || null);
+                        console.log(response);
+                        setAlertMessage("Login successful");
+                        setAlertMessageType("success");
+                        setTimeout(() => {
+                            setAlertMessage("");
+                            setAlertMessageType("");
+                            navigate("/layout/dashboard");
+                        }, [2000])
+                    }
+                })
                 .catch((error) => {
-                    console.error(error);
+                    console.error("Login failed:", error);
+                    setAlertMessage("Invalid Credentails");
+                    setAlertMessageType("error");
+                    setTimeout(() => {
+                        setAlertMessage("");
+                        setAlertMessageType("");
+                        navigate("/login");
+                    }, [2000])
+                });
+
+        } else {
+            // SIGNUP
+            signupRequest(data)
+                .then((response) => {
+                    if (response.status === 201) { // or response.data.status depending on backend
+                        navigate("/login");
+                    }
+                })
+                .catch((error) => {
+                    console.error("Signup failed:", error);
                 });
         }
+    };
 
-    }
     const handleGoogleAuth = () => {
         window.location.href = "http://localhost:8080/oauth2/authorization/google";
     }
     return (
         <div className="flex flex-col justify-center items-center h-full min-w-[375px]">
+            {alertMessage && (
+                <div className="absolute top-10 right-10">
+                    <Alert message={alertMessage} type={alertMessageType} showIcon className="w-[250px] h-[50px]" />
+                </div>
+            )}
             <form className="w-[90%]  px-2 flex flex-col gap-y-2 md:w-[60%] " action="">
                 <h1 className="text-xl text-center font-semibold">Create Your Free Account</h1>
                 {isSignup && (

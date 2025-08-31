@@ -16,6 +16,11 @@ export const loginRequest = async (formData) => {
     }
 }
 
+export const signupRequest = async (data) => {
+    const response = await axios.post("http://localhost:8080/api/auth/signup", data);
+    return response;
+}
+
 export const requestLogout = async () => {
     const response = await axios.get("http://localhost:8080/api/auth/logout");
 }

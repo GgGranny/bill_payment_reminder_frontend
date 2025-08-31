@@ -14,8 +14,10 @@ export const getAllBills = async () => {
 }
 
 export const addNewBill = async (data) => {
+
+    const id = localStorage.getItem("USER_ID");
     try {
-        const response = await axios.post("http://localhost:8080/api/bills/addBill", { withCredentials: true }, data);
+        const response = await axios.post(`http://localhost:8080/api/bills/addBill/${id}`, data);
         return response;
     } catch (error) {
         console.error("something wrong in add bills: ", error);
@@ -59,4 +61,16 @@ export const countUpcomingBills = async () => {
 export const countTotalBills = async () => {
     const response = await getAllBills();
     return response.data.length;
+}
+
+export const handleBillStatusChange = async (billId, status) => {
+    const userId = localStorage.getItem("USER_ID");
+    const response = await axios.patch(`http://localhost:8080/api/bills/updateStatus/${billId}/${userId}`, status);
+    return response;
+}
+
+
+export const deleteBill = async (billId) => {
+    const response = axios.delete(`http://localhost:8080/api/bills/deleteBill/${billId}`);
+    return response;
 }
