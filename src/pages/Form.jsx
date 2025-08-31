@@ -1,11 +1,13 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Button from "../components/auth-button/Button";
-import { addNewBill } from "../api/Bill";
-import { useNavigate } from "react-router";
+import { addNewBill, editBill, getBillById } from "../api/Bill";
+import { useNavigate, useParams } from "react-router";
 
 const Form = () => {
-    const navigate = useNavigate();
+    const params = useParams();
+    const id = params.id;
 
+    const navigate = useNavigate();
     const [data, setData] = useState({
         name: "",
         dueDate: "",
@@ -25,7 +27,33 @@ const Form = () => {
         addNewBill(data)
             .then((response) => {
                 if (response.status === 201) {
-                    navigate("/layout/dashboard");
+                    navigate("/layout/table");
+                }
+            })
+            .catch((error) => {
+                console.error(error);
+            })
+    }
+
+    useEffect(() => {
+        if (!id) return;
+        getBillById(id)
+            .then((response) => {
+                setData(response.data);
+            })
+            .catch((error) => {
+                console.error(error);
+            })
+    }, [])
+
+    const handleEdit = (event) => {
+        event.preventDefault();
+        console.log(id);
+        editBill(id, data)
+            .then((response) => {
+                console.log(response);
+                if (response.status === 200) {
+                    navigate("/layout/table");
                 }
             })
             .catch((error) => {
@@ -57,7 +85,7 @@ const Form = () => {
                     {/** Due Date */}
                     <div className="flex items-center justify-between mt-6 ">
                         <label htmlFor="dueDate" aria-label="dueDate" className="text-sm text-gray-600 font-noraml">Due Date</label>
-                        <input onChange={handleChange} vlaue={data.dueDate} type="date" id="dueDate" name="dueDate" className="bg-gray-200 rounded-sm w- w-[80%] ml-4 py-2 px-2 focus:outline-2  focus:outline-primary-color text-sm" />
+                        <input onChange={handleChange} value={data.dueDate} type="date" id="dueDate" name="dueDate" className="bg-gray-200 rounded-sm w- w-[80%] ml-4 py-2 px-2 focus:outline-2  focus:outline-primary-color text-sm" />
                     </div>
                     {/** Amount */}
                     <div className="flex items-center justify-between mt-6 ">
@@ -69,9 +97,16 @@ const Form = () => {
                         <label htmlFor="fineAmount" aria-label="fineAmount" className="text-sm text-gray-600 font-noraml">Fine Amount</label>
                         <input type="text" id="fineAmount" name="fineAmount" className="bg-gray-200 rounded-sm w- w-[80%] ml-4 py-2 px-2 focus:outline-2  focus:outline-primary-color text-sm" placeholder="Rs." />
                     </div> */}
-                    <div className="flex justify-center mt-10">
-                        <Button className="bg-primary-color px-4 py-1 rounded text-sm font-medium text-snow hover:cursor-pointer hover:bg-[#4044B9] w-[8rem]" onClick={handelSubmit}>Add</Button>
-                    </div>
+                    {id > 0 ? (
+                        <div className="flex justify-center mt-10">
+                            <Button className="bg-primary-color px-4 py-1 rounded text-sm font-medium text-snow hover:cursor-pointer hover:bg-[#4044B9] w-[8rem]" onClick={handleEdit}>Edit</Button>
+                        </div>
+                    ) : (
+                        <div className="flex justify-center mt-10">
+                            <Button className="bg-primary-color px-4 py-1 rounded text-sm font-medium text-snow hover:cursor-pointer hover:bg-[#4044B9] w-[8rem]" onClick={handelSubmit}>Add</Button>
+                        </div>
+                    )
+                    }
                 </form>
             </div>
         </div>

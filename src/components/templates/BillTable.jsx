@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { deleteBill, handleBillStatusChange } from "../../api/Bill";
+import { deleteBill, editBill, handleBillStatusChange } from "../../api/Bill";
 import { useNavigate } from "react-router";
 import Button from "../auth-button/Button";
 import { RiDeleteBin2Fill } from "react-icons/ri";
@@ -12,8 +12,6 @@ import CustomAlert from "./CustomAlert";
 const BillTable = ({ allBills, handleDelete, alertMessage, alertType }) => {
     const [statusData, setStatusData] = useState({});
     const navigate = useNavigate();
-    // const [alertMessage, setAlertMessage] = useState("");
-    // const [alertType, setAlertType] = useState("");
 
     const handleStatusChange = (id, e) => {
         const { value } = e.target;
@@ -24,31 +22,13 @@ const BillTable = ({ allBills, handleDelete, alertMessage, alertType }) => {
         handleBillStatusChange(id, { status: value })
             .then((response) => {
                 console.log(response);
-                location.reload();
+                navigate("/layout/table");
             })
             .catch((error) => {
                 console.error(error);
             })
     };
 
-    // const handleDelete = (billId) => {
-    //     deleteBill(billId)
-    //         .then((response) => {
-    //             setAlertMessage("Bill deleted Successfully");
-    //             setAlertMessage("success");
-    //         })
-    //         .catch((error) => {
-    //             setAlertMessage("Bill delete failed");
-    //             setAlertMessage("error");
-    //             console.error(error);
-    //         })
-    //         .finally(() => {
-    //             setTimeout(() => {
-    //                 setAlertMessage("");
-    //                 setAlertType("");
-    //             }, 2000); // show alert for 2 seconds
-    //         });
-    // }
 
     // Utility: return Tailwind classes based on status
     const getStatusClass = (status) => {
@@ -109,6 +89,7 @@ const BillTable = ({ allBills, handleDelete, alertMessage, alertType }) => {
                                     </td>
                                     <td className="px-4 py-2 border border-gray-300 text-xs font-normal flex items-center gap-2">
                                         <select
+                                            disabled={currentStatus === "PAID"}
                                             name="status"
                                             value={currentStatus}
                                             onChange={(e) => handleStatusChange(data.id, e)}
@@ -126,13 +107,13 @@ const BillTable = ({ allBills, handleDelete, alertMessage, alertType }) => {
                                                 <RiDeleteBin2Fill className="w-5 h-5 text-red-500 group-hover:text-red-700" />
                                             </button>
 
-                                            {/* <Button className="flex items-center justify-center p-2 rounded-md hover:bg-blue-100 hover:text-blue-700 transition-colors duration-200">
+                                            <Button className="flex items-center justify-center p-2 rounded-md hover:bg-blue-100 hover:text-blue-700 transition-colors duration-200" onClick={() => navigate(`/layout/edit/${data.id}`)}>
                                                 <AiFillEdit className="w-5 h-5 text-blue-500" />
                                             </Button>
 
                                             <Button className="flex items-center justify-center p-2 rounded-md hover:bg-gray-100 hover:text-gray-700 transition-colors duration-200">
                                                 <MdMore className="w-5 h-5 text-gray-500" />
-                                            </Button> */}
+                                            </Button>
                                         </div>
 
                                     </td>

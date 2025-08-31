@@ -7,6 +7,7 @@ import Notification from "../templates/Notification";
 import { getALlNotifications, markAsRead } from "../../api/Notifications";
 import { useNavigate } from "react-router";
 import axios from "axios";
+import { getUserById } from "../../service/user";
 
 const Navbar = () => {
     const [showNotification, setShowNotification] = useState(false);
@@ -18,6 +19,29 @@ const Navbar = () => {
     const profileRef = useRef(null);
 
     const [notificationsRead, setNotificationsRead] = useState(false);
+
+    const [user, setUser] = useState({
+        name: "",
+        email: "",
+        profile: null,
+        phone: "98728101",
+        address: "patan"
+    });
+
+    useEffect(() => {
+        getUserById()
+            .then((response) => {
+                setUser({
+                    name: response.data.fullName,
+                    email: response.data.email,
+                    profile: `data:image/png;base64,${response.data.profile}`
+                })
+            })
+            .catch((error) => {
+                console.error(error);
+            })
+    }, [])
+
     useEffect(() => {
         let hasRead = false;
         getALlNotifications()
@@ -32,7 +56,8 @@ const Navbar = () => {
             .catch((error) => {
                 console.error(error);
             })
-    })
+    }, [])
+
     const handleShowNotification = () => {
         setShowNotification((prev) => !prev); // toggle instead of only true
         getALlNotifications()
@@ -148,7 +173,7 @@ const Navbar = () => {
                     >
                         {localStorage.getItem("PROFILE") ? (
                             <img
-                                src={localStorage.getItem("PROFILE")}
+                                src={user.profile}
                                 alt="User profile"
                                 className="h-full w-full object-cover"
                             />
@@ -159,7 +184,7 @@ const Navbar = () => {
 
                     {showProfile && (
                         <div className="absolute top-12 right-0 bg-white rounded-lg shadow-lg w-40 flex flex-col divide-y divide-gray-200 overflow-hidden z-50">
-                            <button className="px-4 py-3 text-left text-gray-700 hover:bg-gray-100 hover:text-gray-900 transition-colors duration-200" onClick={() => navigate("/layout/profileUpload")}>
+                            <button className="px-4 py-3 text-left text-gray-700 hover:bg-gray-100 hover:text-gray-900 transition-colors duration-200" onClick={() => navigate("/layout/user")}>
                                 Change Profile
                             </button>
                             <button className="px-4 py-3 text-left text-gray-700 hover:bg-gray-100 hover:text-gray-900 transition-colors duration-200" onClick={handleLogout}>
@@ -172,10 +197,10 @@ const Navbar = () => {
                 {/* User Info */}
                 <div className="flex flex-col">
                     <p className="text-sm text-space-cadet font-medium">
-                        {localStorage.getItem("FULL_NAME")}
+                        {user.name}
                     </p>
                     <p className="text-xs font-normal text-gray-500">
-                        {localStorage.getItem("EMAIL")}
+                        {user.email}
                     </p>
                 </div>
             </div>

@@ -15,21 +15,21 @@ export const cardData = [
     {
         icon: "FaRegCalendarTimes",
         title: "Overdue Bills",
-        quantity: countOverDueBills()
+        quantity: countOverDueBills
     },
     {
         icon: "FaRegCalendarCheck",
         title: "Paid",
-        quantity: countPaidBills()
+        quantity: countPaidBills
     },
     {
         icon: "LuCalendar",
         title: "Upcomming Bills",
-        quantity: countUpcomingBills()
+        quantity: countUpcomingBills
     },
     {
         icon: "FaRegCalendarAlt",
         title: "Total Bills",
-        quantity: countTotalBills()
+        quantity: countTotalBills
     }
 ]

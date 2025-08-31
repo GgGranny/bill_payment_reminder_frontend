@@ -3,6 +3,7 @@ import { MdPendingActions } from "react-icons/md";
 import { MdOutlineDownloadDone } from "react-icons/md";
 import { MdSettings } from "react-icons/md";
 import { MdDarkMode } from "react-icons/md";
+import { RiAddBoxFill } from "react-icons/ri";
 
 
 export const icons = {
@@ -11,7 +12,8 @@ export const icons = {
     MdPendingActions,
     MdOutlineDownloadDone,
     MdSettings,
-    MdDarkMode
+    MdDarkMode,
+    RiAddBoxFill
 }
 
 
@@ -26,21 +28,26 @@ export const sidebarIcons = [
             }
         ]
     },
-    // {
-    //     label: "PAYMENT",
-    //     links: [
-    //         {
-    //             name: "Pending",
-    //             icon: "MdPendingActions",
-    //             path: "/layout/payment"
-    //         },
-    //         {
-    //             name: "Paid",
-    //             icon: "MdOutlineDownloadDone",
-    //             path: "/layout/paid"
-    //         }
-    //     ]
-    // },
+    {
+        label: "PAYMENT",
+        links: [
+            {
+                name: "Bills",
+                icon: "RiAddBoxFill",
+                path: "/layout/table"
+            }
+            // {
+            //     name: "Pending",
+            //     icon: "MdPendingActions",
+            //     path: "/layout/payment"
+            // },
+            // {
+            //     name: "Paid",
+            //     icon: "MdOutlineDownloadDone",
+            //     path: "/layout/paid"
+            // }
+        ]
+    },
     {
         label: "SYSTEM",
         links: [

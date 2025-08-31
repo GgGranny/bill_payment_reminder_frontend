@@ -9,6 +9,8 @@ import Form from './pages/Form';
 import Login from './pages/Login';
 import ProfileUpload from './pages/ProfileUpload';
 import Settings from './pages/Settings';
+import Tables from './pages/Tables';
+import UserProfile from './pages/UserProfile';
 
 function App() {
   return (
@@ -22,6 +24,9 @@ function App() {
           <Route path="/layout/add" element={<Form />} />
           <Route path="/layout/profileUpload" element={<ProfileUpload />} />
           <Route path="/layout/setting" element={<Settings />} />
+          <Route path="/layout/table" element={<Tables />} />
+          <Route path="/layout/user" element={<UserProfile />} />
+          <Route path="/layout/edit/:id" element={<Form />} />
         </Route>
       </Routes>
     </BrowserRouter>

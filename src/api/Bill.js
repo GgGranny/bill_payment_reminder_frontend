@@ -74,3 +74,14 @@ export const deleteBill = async (billId) => {
     const response = axios.delete(`http://localhost:8080/api/bills/deleteBill/${billId}`);
     return response;
 }
+
+
+export const editBill = async (id, data) => {
+    const response = await axios.post(`http://localhost:8080/api/bills/updateBill/${id}`, data);
+    return response;
+}
+
+export const getBillById = async (id) => {
+    const response = await axios.get(`http://localhost:8080/api/bills/getBillById/${id}`)
+    return response;
+}
